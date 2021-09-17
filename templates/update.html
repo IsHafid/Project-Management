@@ -1,0 +1,181 @@
+{% extends "./base.html" %}
+
+{% block title %}Update{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated and user.is_staff%}
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold text-light">Projet BD </h1>
+        
+        
+      </div>
+    </div>
+  </section>
+
+                             <form class="account-form p-4 rounded col-lg-10 mx-auto" action="{% url "users:U_Update" slug=user.slug %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <h3 class="mb-2 font-weight-bold text-light">Update Your account</h3>
+                                
+                                {% if form.is_valid %}
+                                <h3 class="mb-2 font-weight-bold text-success">Account Successfully Updated !!</h3>
+                                {% endif %}
+                                {% if form.errors %}
+                                <p>Please correct the following errors:</p>
+                                {% for field in form %}
+                                {% if field.errors %}
+                                <div class="alert alert-primary" role="alert">
+                                    {{ field.label }}: {{ field.errors|striptags }}
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                <div class="container">
+                                    <main class="pt-5">
+                                        <div class="row g-3">
+                                            <div class="col-md-4 col-lg-12 order-md-first " >
+                                                <img class="img-fluid mx-auto d-block zoom  bigimg"   alt="Responsive image" src="{{ user.img.url }}">
+                                            </div>
+                                
+                                                <table class="table  table-bordered table-light table-hover">
+                                          
+                                                    <thead class="table bgprofile">
+                                                    <tr>
+                                                      
+                                                      <th class="d-flex justify-content-center" scope="col  ">My Informations </th>
+                                                    </tr>
+                                                    </thead>                               
+                                                  </table>
+                                                <table class="table  table-bordered table-light table-hover">
+                                          
+                                                    <thead class="table bgprofile">
+                                                    <tr>
+                                                      
+                                                      <th scope="col">My Fullname</th>
+                                                      <th scope="col">My E-mail:</th>
+                                                      <th scope="col">My Role:</th>
+                                                    </tr>
+                                                    </thead>
+                                                   
+                                                    
+                                                    <tbody>
+                                                      
+                                                      <tr>
+                                                        
+                                                            
+                                                        
+                                                            
+                                                        <td  style="width: 30%"><h6 class="text-dark">{{ form.firstname }} {{form.lastname}}</h6></td>
+                                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.statut }}</h6></td>  
+                                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.email }}</h6></td>
+                                                    </tr>
+                                                        
+                                      
+                                                  </table>
+                                
+                                                <table class="table  table-bordered table-light table-hover">
+                                          
+                                                    <thead class="table bgprofile">
+                                                    <tr>
+                                                      
+                                                      <th scope="col">My Birthdate</th>
+                                                      <th scope="col">My Phonenum:</th>
+                                                      <th scope="col">My CIN:</th>
+                                                      <th scope="col">My Team:</th>
+                                
+                                                    </tr>
+                                                    </thead>
+                                                   
+                                                    
+                                                    <tbody>
+                                                      
+                                                      <tr>
+                                                        
+                                                        <td  style="width: 30%"><h6 class="text-dark">{{ form.birthdate }}</h6></td>
+                                                        <td style="width: 30%"><h6 class="text-dark">{{ form.phonenum }} </h6></td>
+                                                        <td style="width: 10%"><h6 class="text-dark"> {{ form.CIN }} </h6></td>
+                                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.team }} </h6></td>
+                                                    </tr>
+                                                   
+                                      
+                                                  </table>
+                                                  <table class="table  table-bordered table-light table-hover">
+                                          
+                                                    <thead class="table bgprofile">
+                                                    <tr>
+                                                      
+                                                      <th scope="col">Password</th>
+                                                      <th scope="col">Confirm Password:</th>
+                                                      <th scope="col">My Slug:</th>
+                                                      <th scope="col">My Img:</th>
+                                                      <th scope="col">My CV:</th>
+                                                    </tr>
+                                                    </thead>
+                                                   
+                                                    
+                                                    <tbody>
+                                                      
+                                                      <tr>
+                                                        
+                                                        <td  style="width: 25%"><h6 class="text-dark">{{ form.password }}</h6></td>
+                                                        <td style="width: 25%"><h6 class="text-dark">{{ form.password2 }} </h6></td>
+                                                        <td style="width: 20%"><h6 class="text-dark"> {{ form.slug }} </h6></td>
+                                                        <td style="width: 15%"><h6 class="text-dark"> {{ form.img }} </h6></td>
+                                                        <td style="width: 15%"><h6 class="text-dark"> {{ form.cv }} </h6></td>
+                                                    </tr>
+                                                   
+                                      
+                                                  </table>
+                                                  <table class="table  table-bordered table-light table-hover">
+                                          
+                                                    <thead class="table bgprofile">
+                                                    <tr>
+                                                      
+                                                      <th scope="col">Am i Staff ?:</th>
+                                                      <th scope="col">Am i Manager ?:</th>
+                                                      <th scope="col">Am i Active ?:</th>
+                                                      <th scope="col">Am i Superuser ?:</th>
+                                
+                                                    </tr>
+                                                    </thead>
+                                                   
+                                                    
+                                                    <tbody>
+                                                      
+                                                      <tr>
+                                                        
+                                                        
+                                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.is_staff }} </h6></td>
+                                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.is_manager }} </h6></td>
+                                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.is_active }} </h6></td>
+                                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.is_superuser }} </h6></td>  
+                                                        
+                                                                             </tr>
+                                                   
+                                      
+                                                  </table>
+                                                   
+                                                  <div class="d-grid gap-2">
+                                                    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-40 text-light rounded-pill btn-outline-light zoom bgdiv" type="submit">Update</button>
+                                                  
+                                                    {% else %}
+                                                  <h1 class="text-light text-center">Login To Access The Page</h1>  
+                                                  <a  class="text-light text-center pb-3" href="{% url "users:login"%}" >Login</a>       
+                                                  {% endif %} 
+
+                                            </div>
+                                        </div>
+                                    </main>
+                                
+                                </div>
+                            </form>
+
+
+
+
+
+
+
+
+{% endblock  %}

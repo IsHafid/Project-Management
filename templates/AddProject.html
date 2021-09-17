@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Add Project{% endblock %}
+{% block content %}
+{% if cu.is_staff and not cu.is_manager  %}
+<p><h1  class=" text-danger text-center ">You don't have permission to access this page </h1></p>             
+
+{% else %}
+<style>
+    .container-fluid {
+        max-width: 100%;
+    }
+
+    .users-form input {
+        border: 2px solid #ccc;
+        height: calc(2em + .75rem + 2px);
+    }
+
+    .users-form input:focus {
+        border-color: #1497ff;
+        box-shadow: none;
+    }
+</style>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold text-light">Projet BD </h1>
+        
+      </div>
+    </div>
+  </section>
+  {% if  user.is_authenticated %}
+
+                            <form class="users-form p-4 rounded" action="." method="post">
+
+                                {% csrf_token %}
+                                <h3 class="mb-4 text-light">Add Projects</h3>
+
+                                {% if form.is_valid %}
+                                <h3 class="mb-2 font-weight-bold text-success">Project Successfully Added !!</h3>
+                                {% endif %}
+                                <table class="table  table-bordered table-light table-hover">
+                                          
+                                    <thead class="table bgprofile">
+                                    <tr>
+                                      
+                                      <th class="d-flex justify-content-center" scope="col  ">Add Data </th>
+                                    </tr>
+                                    </thead>                               
+                                  </table>
+                                <table class="table  table-bordered table-light table-hover">
+                          
+                                    <thead class="table bgprofile">
+                                    <tr>
+                                      
+                                      <th scope="col">Name :</th>
+                                      <th scope="col">Slug:</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.name }}</h6></td>  
+                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.slug }}</h6></td>
+                                    </tr>
+                                  </table>
+                                  <table class="table  table-bordered table-light table-hover">
+                          
+                                    <thead class="table bgprofile">
+                                    <tr>
+                                      
+                                      <th scope="col">Team :</th>
+                                      <th scope="col">Category:</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.team }}</h6></td>  
+                                        <td style="width: 30%"><h6 class="text-dark"> {{ form.category }}</h6></td>
+                                    </tr>
+                                    <table class="table  table-bordered table-light table-hover">
+                          
+                                        <thead class="table bgprofile">
+                                        <tr>
+                                          
+                                          <th scope="col">Start Date :</th>
+                                          <th scope="col">Final Date:</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td style="width: 30%"><h6 class="text-dark"> {{ form.Start_D }}</h6></td>  
+                                            <td style="width: 30%"><h6 class="text-dark"> {{ form.Final_D }}</h6></td>
+                                        </tr>
+                                      </table>
+                                      <table class="table  table-bordered table-light table-hover">
+                          
+                                        <thead class="table bgprofile">
+                                        <tr>
+                                          
+                                          <th scope="col">Description :</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td style="width: 10%"><h6 class="text-dark"> {{ form.description }}</h6></td>  
+                                        </tr>
+                                      </table>
+    
+                                  </table>
+                                  <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-40 text-light rounded-pill btn-outline-light zoom bgdiv" type="submit">Confirm</button>
+                                </div>
+
+                            </form>
+                            {% else %}
+                            <h1 class="text-light text-center">Login To Access The Page</h1>  
+                            <a  class="text-light text-center pb-3" href="{% url "users:login"%}" >Login</a>       
+                            {% endif %}
+                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

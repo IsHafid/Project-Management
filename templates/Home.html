@@ -1,0 +1,86 @@
+{% extends "./base.html" %}
+{% block title %}Home{% endblock %}
+{%load static %}
+
+{% block content %}
+{% if  user.is_authenticated %}
+<br>
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+  
+    
+
+        <table class="table  table-bordered table-light table-hover">
+          
+          <thead class="table bgdiv">
+          <tr>
+            
+            <th scope="col">Image</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Role</th>
+            <th scope="col">CV</th>
+            <th scope="col">Details</th>
+          </tr>
+          </thead>
+          {% for user in users %}
+          <tbody>
+            
+            <tr>
+              {% if  user.is_active %}
+              <td style="width: 5%"><img class="img-fluid zoom" style="border-top-left-radius: 25px" alt="Responsive image" src="{{ user.img.url }}" ></td>
+              <td style="width: 30%"><h5 class="text-dark">{{ user.firstname }}</h5></td>
+              <td style="width: 30%"><h5 class="text-dark">{{ user.lastname }} </h5></td>
+              <td style="width: 10%"><h5 class="text-dark">{{ user.statut }} </h5></td>
+              <td style="width: 5%"><a href="{{ user.cv.url }}"> CV Link </a></td>
+              {% if cu.is_staff and not cu.is_manager %}
+              <td style="width: 10%"><p><a class=" text-danger " >You don't have permission to access this page </a></p></td>                
+              {% else %}
+              <td style="width: 10%"><p><a class="btn btn-secondary bgdiv " href="{{ user.get_absolute_url }}">View details </a></p></td>
+              {% endif %}
+              {% else %}
+              <td style="width: 5%"><img class="img-fluid zoom" style="border-top-left-radius: 25px" alt="Responsive image" src="{{ user.img.url }}" ></td>
+              <td style="width: 30%"><h5 class="text-danger">{{ user.firstname }} <h6 class="text-danger">(No Longer With The Company)</h6></h5></td>
+              <td style="width: 30%"><h5 class="text-danger">{{ user.lastname }} <h6 class="text-danger">(No Longer With The Company)</h6></h5></td>
+              <td style="width: 10%"><h5 class="text-danger">Was {{ user.statut }} <h6 class="text-danger">(No Longer With The Company)</h6></h5></td>
+              <td style="width: 5%"><a href="{{ user.cv.url }}"> CV Link </a></td>
+              {% if cu.is_staff and not cu.is_manager  %}
+              <td style="width: 10%"><p><a class=" text-danger " >You don't have permission to access this page </a></p></td>                
+              {% else %}
+              <td style="width: 10%"><p><a class="btn btn-secondary bg-danger " href="{% url "out" %}">View details </a></p></td>
+              {% endif %}
+              
+              {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="text-center text-light"><h6>Managers : <p class="text-warning">{{ M.count }}</p></h6></div>
+        <div class="text-center text-light"><h6>Employees: <p class="text-success">{{ S.count }}</p></h6></div>
+        <div class="text-center text-light"><h6>Active Employees : <p class="text-success">{{ T.count }}</p></h6></div>
+        <div class="text-center text-light"><h6>Former Employees : <p class="text-danger">{{ F.count }}</p></h6></div>
+        {% else %}
+        <h1 class="text-light text-center">Login To Access The Page</h1>  
+        <a  class="text-light text-center pb-3" href="{% url "users:login"%}" >Login</a>       
+        {% endif %} 
+<!-- /.col-lg-4 -->
+
+ 
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends "./base.html" %}
+
+{% block title %}SignUp{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if cu.is_staff  and not cu.is_manager %}
+<p><h1  class=" text-danger text-center ">You don't have permission to access this page </h1></p>             
+
+{% else %}
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold text-light">Projet BD </h1>
+        
+        
+      </div>
+    </div>
+  </section>
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="col-md-12">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-15 col-lg-7  mx-auto">
+                             <form class="account-form p-4 rounded col-lg-10 mx-auto" action="." method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <h3 class="mb-2 font-weight-bold text-light">Create an account</h3>
+                                
+
+                                {% if form.errors %}
+                                <p>Please correct the following errors:</p>
+                                {% for field in form %}
+                                {% if field.errors %}
+                                <div class="alert alert-primary" role="alert">
+                                    {{ field.label }}: {{ field.errors|striptags }}
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                                <div class="container">
+                                 <div class="row align-items-start">
+                                 <div class="col-6">
+                                <label class="text-light">{{ form.statut.label }}
+                                <div>{{ form.statut }}</div>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light" >{{ form.email.label}}
+                                <div>{{ form.email }}</div>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.password.label}}    
+                                <div>{{ form.password }}</div>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.password2.label}}
+                                <div>{{ form.password2 }}</div>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.firstname.label}}
+                                <div>{{ form.firstname }}</div><br>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.lastname.label}}
+                                <div>{{ form.lastname }}</div><br>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.img.label}}
+                                <div>{{ form.img }}</div><br>
+                                </div>
+                                <div class="col-6">     
+                                <label class="text-light">{{ form.cv.label}}
+                                <div>{{ form.cv }}</div><br>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.is_staff.label}}
+                                <div>{{ form.is_staff }}</div><br>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.is_manager.label}}
+                                <div>{{ form.is_manager }}</div><br>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.slug.label}}
+                                <div>{{ form.slug }}</div><br>
+                                </div>
+                                <div class="col-6">
+                                <label class="text-light">{{ form.CIN.label}}
+                                <div>{{ form.CIN }}</div><br>
+                                </div>
+                                <div class="col-6">
+                                    <label class="text-light">{{ form.phonenum.label}}
+                                    <div>{{ form.phonenum }}</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="text-light">{{ form.birthdate.label}}
+                                        <div>{{ form.birthdate }}</div>
+                                        </div>                                
+                                <div class="col-6 ">
+                                <button class="btn btn-primary btn-block py-2 mb-4 mt-5 fw500 w-100 text-light rounded-pill btn-outline-light zoom bgdiv" type="submit">Confirm</button>
+                                <p class="text-center text-light">
+                                    <br>
+                                    <a  href="/" >Home</a>
+                                </p>
+                                </div>
+                            </form>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock  %}

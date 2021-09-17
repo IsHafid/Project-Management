@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+
+<style>
+    .container-fluid {
+        max-width: 100%;
+    }
+
+    .users-form input {
+        border: 2px solid #ccc;
+        height: calc(2em + .75rem + 2px);
+    }
+
+    .users-form input:focus {
+        border-color: #1497ff;
+        box-shadow: none;
+    }
+</style>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold text-light">Projet BD </h1>
+        
+      </div>
+    </div>
+  </section>
+    {% if not user.is_authenticated %}
+    
+  
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="col-md-12">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-lg-6  mx-auto">
+                            <form class="users-form p-4 rounded" method="POST" action="{% url 'users:login' %}" >
+
+                                {% csrf_token %}
+                                <h3 class="mb-4 text-light">Sign In</h3>
+
+                                {% if form.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    Error: Email or Password not correct!
+                                </div>
+                                {% endif %}
+
+                                <label class="form-label text-light">{{ form.email.label }}</label>
+                                {{ form.email }}
+
+                                <label class="form-label text-light">{{ form.password.label }}</label>
+                                {{ form.password }}
+                                <div class="d-grid gap-2">
+                                    <input type="hidden" name="next" value="{{ next }}">
+                                    <button class="btn text-light py-2 mb-4 mt-5 fw-bold rounded-pill bgdiv" type="submit" value="Log-in">Sign in
+                                    </button>
+                                </div>
+                            </form>
+                                <p class="text-center pb-3">
+                                    <a href="/">Create an account</a>
+                                    <br>
+                                    <a  href="/" >Home</a>
+                                </p>
+
+                            
+    {% else %}
+    <h1 class="text-light text-center">YOU ARE ALREADY LOGGED IN !!</h1>  
+    <a  class="text-light text-center pb-3" href="/" >Home</a>                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
